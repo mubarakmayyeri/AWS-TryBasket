@@ -197,7 +197,7 @@
         }
 
 
-    var amount=Number("{{grand_total}}");
+    let amount=Number("{{grand_total}}");
     amount =  amount/81.52;
     amount = amount.toFixed(2)
     var url = "{% url 'payments' %}"
