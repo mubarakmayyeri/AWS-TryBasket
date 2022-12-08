@@ -12,10 +12,12 @@ from carts.views import _cart_id
 def home(request):
   featured_categories = Sub_Category.objects.all().filter(is_featured=True)[:5]
   featured_products = Product.objects.all().filter(is_featured=True)[:8]
+  off_products = Product.objects.filter(product_offer__gt=0)
   
   context = {
     'featured_categories': featured_categories,
     'featured_products': featured_products,
+    'off_products':off_products,
   }
   
   return render(request, 'home.html', context)
@@ -24,7 +26,6 @@ def shop(request, category_slug=None, sub_category_slug=None):
   categories_shop= None
   subCategories_shop = None
   products = None
-  off_products = Product.objects.filter(product_offer__gt=0)
     
   if sub_category_slug != None:
     subCategories_shop = get_object_or_404(Sub_Category, slug=sub_category_slug)
@@ -34,7 +35,6 @@ def shop(request, category_slug=None, sub_category_slug=None):
   elif category_slug != None:
     categories_shop = get_object_or_404(Category, slug=category_slug)
     products = Product.objects.all().filter(category=categories_shop, is_available=True)
-    print(categories_shop)
     product_count = products.count()
         
   else:
@@ -61,7 +61,6 @@ def shop(request, category_slug=None, sub_category_slug=None):
     'categories_shop':categories_shop,
     'subCategories_shop':subCategories_shop,
     'products':page_obj,
-    'off_products':off_products,
     'product_count':product_count
   }
   return render(request, 'shop/shop.html', context)
