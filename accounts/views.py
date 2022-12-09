@@ -143,7 +143,7 @@ def otpLogin(request):
       return redirect('otpLogin')
     
     send_otp(phone_number)
-    print(phone_number)
+    
     return redirect('otpVerification')
   
   return render(request, 'accounts/otpLogin.html')

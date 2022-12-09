@@ -553,7 +553,7 @@ def update_order(request, id):
     if status  == "Delivered":
       try:
           payment = Payment.objects.get(payment_id = order.order_number, status = False)
-          print(payment)
+          
           if payment.payment_method == 'Cash On Delivery':
               payment.status = True
               payment.save()

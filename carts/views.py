@@ -224,7 +224,7 @@ def decqnty(request):
     for cart_item in cart_items:
       total += int(cart_item.price)*int(cart_item.quantity)
     
-    print(total)
+    
     tax = (5 * total)/100
     grand_total = total + tax
     grand_total = format(grand_total, '.2f')

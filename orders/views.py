@@ -247,7 +247,7 @@ def cancel_order(request,id):
 def return_order(request, id):
   if request.method == 'POST':
     return_reason = request.POST['return_reason']
-  print(return_reason)
+  
   order = Order.objects.get(order_number = id,user = request.user)
   order.status = "Returned"
   order.is_returned = True
